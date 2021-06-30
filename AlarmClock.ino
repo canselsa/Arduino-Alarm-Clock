@@ -16,11 +16,8 @@ int currentStateb2 = 0;
 int currentStateb3 = 0;
 int currentStateb4 = 0;
 
-//Button states
 int btnstateb1 = 0, btnstateb2 = 0, btnstateb3 = 0, btnstateb4 = 0;
-
 long debounceDelay = 0.01;
-
 long lastDebounceTimeb1 = 0;
 long lastDebounceTimeb3 = 0;
 long lastDebounceTimeb2 = 0;
@@ -37,8 +34,6 @@ int hour = 17;
 int minute = 04;
 int second = 57;
 int h = 0;
-
-//alarm hour and minute
 int alarmHour = 17;
 int alarmMin = 05;
 
@@ -67,9 +62,6 @@ void setup()
     sei();
 }
 
-/////////////////////////////////////////////
-
-//Timer
 ISR(TIMER1_COMPA_vect) {
     second++;
 
@@ -89,8 +81,7 @@ ISR(TIMER1_COMPA_vect) {
         buzzer = true;
     }
   }
-/////////////////////////////////////////////
-//TEMPERATURE
+
 void loop()
 {
     currentStateb1 = digitalRead(b1);
@@ -158,8 +149,7 @@ if ((millis() - lastDebounceTimeb1) > debounceDelay) {
     }
 
 /////////////////////////////////////////////
-// BUTTON B4 Snooze button
-
+// BUTTON B4
 currentStateb4 = digitalRead(b4); 
     if ((millis() - lastDebounceTimeb4) > debounceDelay) {
         if (currentStateb4 != btnstateb4) {
@@ -224,7 +214,6 @@ currentStateb4 = digitalRead(b4);
         
     }
 
-///////////////////////////////////////////// 
         if (alarmSet == false) {
             lcd.setCursor(0, 1);
             lcd.print("OFF Alarm "); 
@@ -238,7 +227,7 @@ currentStateb4 = digitalRead(b4);
             if (alarmMin < 10)lcd.print("0"); 
              lcd.print(alarmMin);
         }
-        //when b2 is pressed Alarm is set up
+  
         else {
             lcd.setCursor(0, 1);
             lcd.print("ON  Alarm ");
