@@ -9,9 +9,8 @@ const int b4 = 7; //Button4 - Snooze button
 int alarmPin = 13;
 int tempPin = 0;
 
-int buzzer = 0; //alarm sound
+int buzzer = 0; 
 
-//current states the buttons (reading)
 int currentStateb1 = 0;
 int currentStateb2 = 0;
 int currentStateb3 = 0;
@@ -20,15 +19,14 @@ int currentStateb4 = 0;
 //Button states
 int btnstateb1 = 0, btnstateb2 = 0, btnstateb3 = 0, btnstateb4 = 0;
 
-long debounceDelay = 0.01; //the debounce time (0.01 ms) - increase if the output flickers
+long debounceDelay = 0.01;
 
-//the last time the output pin was toggled
 long lastDebounceTimeb1 = 0;
 long lastDebounceTimeb3 = 0;
 long lastDebounceTimeb2 = 0;
 long lastDebounceTimeb4 = 0;
 
-int degree = false; //Temperature format
+int degree = false;
 float Celcius, Fahrenheit;
 
 int alarmSet = false;
@@ -86,8 +84,6 @@ ISR(TIMER1_COMPA_vect) {
     if (hour == 24) {
         hour = 0;
     }
-
-//The alarm will sound when the time and the alarm are equal.
     if (hour == alarmHour && minute == alarmMin && alarmSet == 1) {
         tone(alarmPin, 1234);
         buzzer = true;
@@ -153,7 +149,6 @@ if ((millis() - lastDebounceTimeb1) > debounceDelay) {
             btnstateb3 = currentStateb3;
           
 //Temparature 
-  // button 3 can switch between C and F
      if (btnstateb3 == 1) {
            if (degree == false) {
                degree = true;} 
@@ -164,17 +159,15 @@ if ((millis() - lastDebounceTimeb1) > debounceDelay) {
 
 /////////////////////////////////////////////
 // BUTTON B4 Snooze button
-//Temporarily stops alarm for only 5 minutes
 
 currentStateb4 = digitalRead(b4); 
     if ((millis() - lastDebounceTimeb4) > debounceDelay) {
         if (currentStateb4 != btnstateb4) {
             btnstateb4 = currentStateb4;
           
-          //If button 4 is pressed while alarm is sounding
             if (btnstateb4 == 1) {
               if (buzzer == true) {
-                        alarmMin=alarmMin+5; //stops alarm for only +5min 
+                        alarmMin=alarmMin+5; 
                         if (alarmMin >= 60) {
                             alarmHour++;
                             alarmMin = 0;
@@ -189,12 +182,10 @@ currentStateb4 = digitalRead(b4);
         }
     }
 
-/////////////////////////////////////////////
-//Clock Part - switching between 12H and 24H modes and adjusting the hour and minute
         if (clockFormat == false) {
             lcd.setCursor(0, 0);
-          if (hour < 10)  //if the hour is less than 10 such as 9 it will put a 0 before 9
-            lcd.print("0"); //to write 0 when it is AM (like 01:00 AM)
+          if (hour < 10) 
+            lcd.print("0"); 
             lcd.print(hour);
             lcd.print(":");
             lcd.setCursor(3, 0);
@@ -205,13 +196,13 @@ currentStateb4 = digitalRead(b4);
             lcd.print("  ");
         }
         else if (clockFormat == true) {   
-            if (hour >= 12) { //if hour greater or equal to 12 time is PM
+            if (hour >= 12) { 
               time = "PM";  }
           
             else { 
               time = "AM"; 
             }
-             //if hour is greater than 12 it going to convert to 00-12 AM/PM
+   
             if (hour > 12) { 
               h = (hour - 12); 
             }
@@ -234,18 +225,17 @@ currentStateb4 = digitalRead(b4);
     }
 
 ///////////////////////////////////////////// 
-//ALARM displaying
         if (alarmSet == false) {
             lcd.setCursor(0, 1);
-            lcd.print("OFF Alarm "); //When b2 is unpressed alarm is not set up
+            lcd.print("OFF Alarm "); 
             lcd.setCursor(10, 1);
-            if (alarmHour < 10)lcd.print("0"); //Hour
+            if (alarmHour < 10)lcd.print("0"); 
              lcd.print(alarmHour);
              lcd.print(":");
 
              lcd.setCursor(13, 1);
             
-            if (alarmMin < 10)lcd.print("0"); //Minute
+            if (alarmMin < 10)lcd.print("0"); 
              lcd.print(alarmMin);
         }
         //when b2 is pressed Alarm is set up
@@ -254,18 +244,16 @@ currentStateb4 = digitalRead(b4);
             lcd.print("ON  Alarm ");
             lcd.setCursor(10, 1);
             
-          if (alarmHour < 10)lcd.print("0");//Hour
+          if (alarmHour < 10)lcd.print("0");
             lcd.print(alarmHour);
             lcd.print(":");
             lcd.setCursor(13, 1);
             
-          if (alarmMin < 10)lcd.print("0");  //Minute
+          if (alarmMin < 10)lcd.print("0");
             lcd.print(alarmMin);
         
     }
 
-    /////////////////////////////////////////////
-    //Temparature Displaying
     if (degree == false) {
         lcd.setCursor(9, 0);
 
