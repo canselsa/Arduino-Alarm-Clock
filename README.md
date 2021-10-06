@@ -17,11 +17,11 @@ Button 3-Switching between temperature scales (Fahrenheit /Celcius)
 
 Button 4-Snooze button (Temporarily stops alarm for only 5 minutes)
 
-- Piezo buzzer for the alarm sound 
+ - Piezo buzzer for the alarm sound 
 
-- Potentiometer for changing backlight brightness 
+ - Potentiometer for changing backlight brightness 
 
-- Temperature sensor for detecting temperature
+ - Temperature sensor for detecting temperature
 ```
 
 ![Circuit](https://user-images.githubusercontent.com/74294837/123959725-c5bd8180-d9ae-11eb-8bab-43e4431e94a0.png)
