@@ -18,7 +18,9 @@ Button 3-Switching between temperature scales (Fahrenheit /Celcius)
 Button 4-Snooze button (Temporarily stops alarm for only 5 minutes)
 
 - Piezo buzzer for the alarm sound 
+
 - Potentiometer for changing backlight brightness 
+
 - Temperature sensor for detecting temperature
 ```
 
