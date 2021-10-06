@@ -3,7 +3,9 @@
 **LCD screen which is showing:** 
 ```
 - Current time (Switchable between “00:00-24:00” and “00-12 AM/PM”) 
+
 - Alarm time (with a symbol indicating ON/OFF) 
+
 - Temperature (Switchable between Celsius and Fahrenheit) 
 ```
 ```
